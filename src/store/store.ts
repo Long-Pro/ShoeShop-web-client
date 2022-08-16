@@ -3,12 +3,14 @@ import { configureStore } from '@reduxjs/toolkit'
 import user from './slices/user'
 import titleReducer from './slices/title'
 import isLoginReducer from './slices/isLogin'
+import comment from './slices/comment'
 
 export const store = configureStore({
   reducer: {
     user: user,
     title: titleReducer,
     isLogin: isLoginReducer,
+    comment,
   },
 })
 

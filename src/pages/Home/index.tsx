@@ -1,15 +1,19 @@
 import { useState, useEffect } from 'react'
 import classNames from 'classnames/bind'
-import { updateUser } from '../../store'
+import { AppDispatch, updateUser } from '../../store'
+import { updateComment } from '../../store/slices/comment'
+import { getAllComment } from '../../store/slices/comment'
 import useStore from '../../store/helper'
 import { User } from '../../Interfaces'
 import styles from './Home.module.scss'
+import { useDispatch } from 'react-redux'
 const cx = classNames.bind(styles)
 function Home() {
-  let [{ user }, dispatch] = useStore()
+  let [{ user }] = useStore()
+  const dispatch = useDispatch<AppDispatch>()
   let x = user
   setTimeout(() => {
-    dispatch(updateUser({ name: '123', account: '1234' }))
+    dispatch(getAllComment())
   }, 2000)
   setInterval(() => {
     console.log(x)
