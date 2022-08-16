@@ -1,4 +1,4 @@
 export interface User {
-  name?: string
-  account?: string
+  name: string
+  account: string
 }

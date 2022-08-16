@@ -1,25 +1,20 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { getComment } from './service'
+
+import { getAllComment as getAll } from './services'
 import { Comment } from '../../Interfaces'
 
-export const getAllComment = createAsyncThunk('commnet/getAll', async () => {
-  const response = await fetch('https://jsonplaceholder.typicode.com/comments', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-  const jsonData = await response.json()
-  return jsonData
+export const getAllComment = createAsyncThunk('comment/getAll', async () => {
+  const response = await getAll()
+  return response
 })
 
-export interface InitialState {
+export interface CommentState {
   value: Comment[]
   isLoaded: boolean
   error: any
 }
-const initialState: InitialState = {
+const initialState: CommentState = {
   value: [],
   isLoaded: false,
   error: '',
@@ -32,18 +27,12 @@ export const commentSlice = createSlice({
       state.value = action.payload
     },
   },
-
-  // Code logic xử lý async action
   extraReducers: (builder) => {
-    // Khi thực hiện action getAllComment thành công (Promise fulfilled)
     builder.addCase(getAllComment.fulfilled, (state, action: any) => {
-      // Tắt trạng thái loading, lưu thông tin user vào store
       state.isLoaded = true
       state.value = action.payload
     })
-    // Khi thực hiện action getAllComment thất bại (Promise rejected)
     builder.addCase(getAllComment.rejected, (state, action) => {
-      // Tắt trạng thái loading, lưu thông báo lỗi vào store
       state.isLoaded = false
       state.error = 'loi ---------------'
     })

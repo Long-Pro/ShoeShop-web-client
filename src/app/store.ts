@@ -1,16 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 
-import user from './slices/user'
-import titleReducer from './slices/title'
-import isLoginReducer from './slices/isLogin'
-import comment from './slices/comment'
+import userReducer from '../features/user/userSlice'
+import commentReducer from '../features/comment/commentSlice'
 
 export const store = configureStore({
   reducer: {
-    user: user,
-    title: titleReducer,
-    isLogin: isLoginReducer,
-    comment,
+    user: userReducer,
+    comment: commentReducer,
   },
 })
 

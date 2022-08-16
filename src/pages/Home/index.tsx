@@ -1,22 +1,17 @@
 import { useState, useEffect } from 'react'
 import classNames from 'classnames/bind'
-import { AppDispatch, updateUser } from '../../store'
-import { updateComment } from '../../store/slices/comment'
-import { getAllComment } from '../../store/slices/comment'
-import useStore from '../../store/helper'
+import { AppDispatch } from '../../app/store'
+import { getAllComment } from '../../features/comment/commentSlice'
+import { useAppSelector, useAppDispatch } from '../../app/hooks'
 import { User } from '../../Interfaces'
 import styles from './Home.module.scss'
 import { useDispatch } from 'react-redux'
 const cx = classNames.bind(styles)
 function Home() {
-  let [{ user }] = useStore()
-  const dispatch = useDispatch<AppDispatch>()
-  let x = user
+  const dispatch = useAppDispatch()
+  let { value, isLoaded, error } = useAppSelector((state) => state.comment)
   setTimeout(() => {
     dispatch(getAllComment())
-  }, 2000)
-  setInterval(() => {
-    console.log(x)
   }, 2000)
   return (
     <div className={cx('wrapper')}>

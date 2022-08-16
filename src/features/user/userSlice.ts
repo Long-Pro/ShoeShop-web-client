@@ -3,13 +3,14 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 
 import { User } from '../../Interfaces'
 
-export interface InitialState {
-  value: User
+interface UserState {
+  value?: User
   isLoaded: boolean
   error: any
 }
-const initialState: InitialState = {
-  value: {},
+
+const initialState: UserState = {
+  value: undefined,
   isLoaded: false,
   error: '',
 }
